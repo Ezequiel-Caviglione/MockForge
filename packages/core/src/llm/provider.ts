@@ -47,7 +47,7 @@ export class OpenAICompatibleProvider implements LLMProvider {
       }
       messages.push({ role: 'user', content: prompt })
 
-      console.log(`[Testing] Llamada al LLM iniciada - baseURL: ${this.state.config.baseURL} | modelo: ${this.state.config.model}`);
+
 
       const response = await this.client.chat.completions.create({
         model: this.state.config.model,
@@ -60,7 +60,7 @@ export class OpenAICompatibleProvider implements LLMProvider {
       this.state.successCount++
       return content
     } catch (err: unknown) {
-      console.error(`[Testing] Error en ${this.state.config.name}:`, err instanceof Error ? err.message : err);
+
       this.state.errorCount++
 
       // Detect rate limiting
