@@ -1,0 +1,91 @@
+:root {
+  --bg-base: #0a0a0f;
+  --bg-surface: #111118;
+  --bg-elevated: #1a1a24;
+  --accent-primary: #7c3aed;    /* violet */
+  --accent-secondary: #06b6d4;  /* cyan */
+  --accent-glow: rgba(124, 58, 237, 0.3);
+  --text-primary: #f8f8ff;
+  --text-muted: #6b7280;
+  --border: rgba(255,255,255,0.08);
+  --border-accent: rgba(124, 58, 237, 0.4);
+  --radius: 8px;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+/* Responsive layout utilities */
+.workspace-container {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+  min-height: 0;
+}
+
+@media (max-width: 768px) {
+  .workspace-container {
+    flex-direction: column;
+    height: auto;
+    min-height: auto;
+  }
+  
+  /* On mobile, remove the hard height limits so page scrolls naturally */
+  .mobile-scrollable {
+    height: auto !important;
+    min-height: 100dvh;
+    overflow-y: auto;
+  }
+}
