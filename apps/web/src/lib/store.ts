@@ -15,8 +15,9 @@ interface MockForgeStore {
   aiUsed: boolean;
   
   // Export
-  exportFormat: 'json' | 'typescript';
-  setExportFormat: (format: 'json' | 'typescript') => void;
+  exportFormat: 'json' | 'json-fields' | 'typescript' | 'javascript' | 'python' | 'dart';
+  setExportFormat: (format: 'json' | 'json-fields' | 'typescript' | 'javascript' | 'python' | 'dart') => void;
+
   
   // API Settings
   useCustomProvider: boolean;
