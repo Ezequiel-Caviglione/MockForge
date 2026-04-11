@@ -1,7 +1,7 @@
 'use client';
 
 import { useMockForgeStore } from '@/lib/store';
-import Editor from '@monaco-editor/react';
+import Editor, { type Monaco } from '@monaco-editor/react';
 
 export default function SchemaEditor() {
   const { schemaText, setSchemaText } = useMockForgeStore();
@@ -10,6 +10,16 @@ export default function SchemaEditor() {
     if (value !== undefined) {
       setSchemaText(value);
     }
+  };
+
+  // Disable TypeScript diagnostics (red squiggles) before the editor mounts.
+  // The editor still provides syntax highlighting and basic IntelliSense.
+  const handleBeforeMount = (monaco: Monaco) => {
+    monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+      noSemanticValidation: true,
+      noSyntaxValidation: true,
+      noSuggestionDiagnostics: true,
+    });
   };
 
   return (
@@ -21,6 +31,7 @@ export default function SchemaEditor() {
         theme="vs-dark"
         value={schemaText}
         onChange={handleEditorChange}
+        beforeMount={handleBeforeMount}
         options={{
           automaticLayout: true,
           minimap: { enabled: false },
