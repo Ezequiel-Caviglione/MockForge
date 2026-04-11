@@ -131,26 +131,42 @@ export default function ScenarioDiffModal({
       >
         {/* Header */}
         <div style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          padding: '1rem 1.25rem',
+          padding: '0.875rem 1.25rem',
           borderBottom: '1px solid var(--border)',
-          gap: '1rem', flexWrap: 'wrap',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.5rem',
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-            <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>
+          {/* Row 1: title + close — never wraps */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', minWidth: 0 }}>
+            <span style={{ fontWeight: 600, fontSize: '0.95rem', whiteSpace: 'nowrap' }}>
               Compare Scenarios
             </span>
-            {compareScenario && (
+            <button
+              onClick={onClose}
+              style={{
+                flexShrink: 0,
+                background: 'transparent', border: '1px solid var(--border)',
+                color: 'var(--text-muted)', borderRadius: '6px',
+                padding: '0.25rem 0.5rem', cursor: 'pointer', fontSize: '0.875rem',
+                lineHeight: 1,
+              }}
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* Row 2: stats + hide-identical toggle */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', flexWrap: 'wrap' }}>
+            {compareScenario ? (
               <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                 {changedCount} difference{changedCount !== 1 ? 's' : ''}
                 {identicalCount > 0 && ` · ${identicalCount} identical`}
               </span>
+            ) : (
+              <span />
             )}
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            {/* Hide identical toggle */}
-            <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', cursor: 'pointer', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', cursor: 'pointer', fontSize: '0.8rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
               <input
                 type="checkbox"
                 checked={hideIdentical}
@@ -159,17 +175,6 @@ export default function ScenarioDiffModal({
               />
               Hide identical
             </label>
-
-            <button
-              onClick={onClose}
-              style={{
-                background: 'transparent', border: '1px solid var(--border)',
-                color: 'var(--text-muted)', borderRadius: '6px',
-                padding: '0.25rem 0.5rem', cursor: 'pointer', fontSize: '0.875rem',
-              }}
-            >
-              ✕
-            </button>
           </div>
         </div>
 
