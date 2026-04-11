@@ -8,6 +8,7 @@ coverage
 
 # build outputs
 dist/
+packages/formatters/dist/
 
 # next.js
 .next/
